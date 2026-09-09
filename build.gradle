@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group = 'cajanegra2'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    karateVersion = '2.1.2'
+    junitVersion = '5.14.4'
+}
+
+dependencies {
+    testImplementation "io.karatelabs:karate-core:${karateVersion}"
+    testImplementation "ch.qos.logback:logback-classic:1.5.6"
+    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'karate.output.dir', 'target/'
+    systemProperty "karate.options", System.getProperty("karate.options")
+}
